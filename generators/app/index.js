@@ -1,7 +1,10 @@
 'use strict';
+
+var spawn = require('child_process').spawn;
 var yeoman = require('yeoman-generator');
 var chalk = require('chalk');
 var yosay = require('yosay');
+var GeneratorKicker = require('../../libs/generator-kicker');
 
 module.exports = yeoman.Base.extend({
   prompting: function () {
@@ -32,5 +35,24 @@ module.exports = yeoman.Base.extend({
 
   install: function () {
     this.installDependencies();
+  },
+
+  end: {
+    kick: function () {
+      var kicker = GeneratorKicker.create('gulp-webapp');
+      return kicker.kick();
+    },
+
+    replace1: function () {
+      console.log('replace1');
+    },
+
+    replace2: function () {
+      console.log('replace2');
+    },
+
+    install: function () {
+      this.installDependencies();
+    }
   }
 });
